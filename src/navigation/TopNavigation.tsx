@@ -1,8 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {Fragment} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,6 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import { Link, withRouter} from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -31,10 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     appBar: {
-      marginLeft: drawerWidth,
-      [theme.breakpoints.up('sm')]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-      },
+      zIndex: theme.zIndex.drawer + 1,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -55,29 +51,39 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 
-export default function ResponsiveDrawer(props: any) {
+export default withRouter(ResponsiveDrawer)
+
+
+function ResponsiveDrawer(props: any) {
 //   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+
+  const { location } = props;
+
   function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
   }
-
+  
   const drawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <List>
-        {['Tab 1', 'Tab 2', 'Tab 3'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
 
-    </div>
+      <Fragment>
+        <Hidden smDown>
+          <div className={classes.toolbar} />
+        </Hidden>
+        
+        <List>
+          {[{text: 'Home', to: '/', icon: <InboxIcon />}, {text: 'writers', to: '/writers', icon: <MailIcon />}].map((item, index) => (
+            <ListItem component={Link} to={item.to} button key={item.text} selected={location.pathname === item.to}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText>{item.text}</ListItemText>
+            </ListItem>
+          ))}
+        </List>
+      </Fragment>
+
   );
 
   return (
@@ -132,8 +138,7 @@ export default function ResponsiveDrawer(props: any) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Typography paragraph>
-        </Typography>
+        {props.children}
       </main>
     </div>
   );
