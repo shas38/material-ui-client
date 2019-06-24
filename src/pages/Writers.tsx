@@ -1,4 +1,6 @@
 import React, {useEffect, useReducer} from 'react';
+import { connect } from 'react-redux';
+import addWritersAction from '../actions/addWritersAction';
 
 type IappState = {
   writers?: Array<object>,
@@ -10,8 +12,10 @@ type IappAction = {
   payload?: Array<object>,
 }
 
-export default (props: any) => {
 
+const Writers = (props: any) => {
+
+  console.log({props});
   const initialDataFetchReducer = (state: IappState, action: IappAction) => {
     switch (action.type) {
       case 'FETCH_INIT':
@@ -51,8 +55,10 @@ export default (props: any) => {
         const result = await fetch("http://localhost:5000/writers");
         const writers = await result.json();
         dispatch({ type: 'FETCH_SUCCESS', payload: writers });
+        props.addWriters(writers);
       }
       catch(err){
+        console.log(err)
         dispatch({ type: 'FETCH_FAILURE' });
       }
     }
@@ -73,3 +79,13 @@ export default (props: any) => {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch: any) =>{
+  console.log({dispatch})
+  return {
+    addWriters: (writers: any) => {
+      dispatch(addWritersAction(writers));
+    }
+  }
+}
+export default connect(null, mapDispatchToProps)(Writers);
