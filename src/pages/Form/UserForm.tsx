@@ -4,6 +4,9 @@ import FormPersonalDetails from './FormPersonalDetails';
 import Confirm from './Confirm';
 import Success from './Success';
 
+const style = {
+
+}
 const UserForm = (props: any) => {
 
     const [step, setStep] = useState(1);
@@ -29,23 +32,24 @@ const UserForm = (props: any) => {
 
     // Handle fields change
     const handleChange = (input: any) => (e: any) => {
-        console.log(input)
-    // setState({ [input]: e.target.value });
+        
+        const newState = {...state, ...{[input]: e.target.value}};
+        console.log(newState)
+        setState(newState);
     };
 
     const { firstName, lastName, email, occupation, city, bio } = state;
     const values = { firstName, lastName, email, occupation, city, bio };
-
+    
     switch (step) {
         case 1:
-            return (
-                <div style={{width: '80%', margin: "auto", textAlign: 'center'}}>
+            return (             
             <FormUserDetails
                 nextStep={nextStep}
                 handleChange={handleChange}
                 values={values}
                 
-            /></div>
+            />
             );
         case 2:
             return (

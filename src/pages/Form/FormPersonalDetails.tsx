@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'; 
-import AppBar from '@material-ui/core/AppBar';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
@@ -23,7 +22,7 @@ const FormPersonalDetails = (props: any) => {
     return (
       <MuiThemeProvider theme={theme}>
         <React.Fragment>
-          {/* <AppBar title="Enter Personal Details" /> */}
+          <h1 title="Enter Personal Details"> Enter Personal Details </h1>
           <TextField
             placeholder="Enter Your Occupation"
             label="Occupation"

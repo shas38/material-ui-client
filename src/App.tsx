@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import './App.css';
 import Home from './pages/Home'
 import Writers from './pages/Writers'
-import UserForm from './pages/Form/UserForm'
+import Form from './pages/Form/Form'
 import TopNavigation from "./navigation/TopNavigation"
 import reduxReducers from './reducers/reduxReducers';
 
@@ -29,7 +29,7 @@ function App() {
             />
             <Route
               path="/forms"
-              component={UserForm}
+              component={Form}
             />
             <Route
               render={()=> <h1>Not Found</h1>}

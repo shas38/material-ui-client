@@ -19,7 +19,7 @@ const FormUserDetails = (props: any)=> {
   return (
     <MuiThemeProvider theme={theme}>
         <React.Fragment>
-          {/* <AppBar title="Enter User Details" /> */}
+          <h1 title="Enter User Details"> Enter User Details </h1>
           <TextField
             placeholder="Enter Your First Name"
             label="First Name"

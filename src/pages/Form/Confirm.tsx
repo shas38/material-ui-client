@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'; 
-import AppBar from '@material-ui/core/AppBar';
 import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -25,7 +24,7 @@ const  Confirm = (props: any) => {
     return (
       <MuiThemeProvider theme={theme}>
         <React.Fragment>
-          {/* <AppBar title="Confirm User Data" /> */}
+          <h1 title="Confirm User Data"> Confirm User Data </h1>
           <List>
             <ListItem>
                 <ListItemText
@@ -72,7 +71,6 @@ const  Confirm = (props: any) => {
             Confirm & Continue   
             </Button>
             <Button
-                color="primary"
                 onClick={back}
             >
             Back
