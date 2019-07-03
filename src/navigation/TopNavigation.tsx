@@ -75,7 +75,11 @@ function ResponsiveDrawer(props: any) {
         </Hidden>
         
         <List>
-          {[{text: 'Home', to: '/', icon: <InboxIcon />}, {text: 'writers', to: '/writers', icon: <MailIcon />}].map((item, index) => (
+          {[
+            {text: 'Home', to: '/', icon: <InboxIcon />},
+            {text: 'Writers', to: '/writers', icon: <MailIcon />},
+            {text: 'Forms', to: '/forms', icon: <MailIcon />},
+          ].map((item, index) => (
             <ListItem component={Link} to={item.to} button key={item.text} selected={location.pathname === item.to}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText>{item.text}</ListItemText>
